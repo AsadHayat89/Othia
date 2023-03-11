@@ -406,6 +406,8 @@ class _TimeFilterState extends State<TimeFilter> {
       dynamicProvider.setTimeCaption(caption: null);
     });
   }
+
+  // callback fucniton for onselect on datepicker
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     // TODO: implement your code here
     print(args.value.startDate);
@@ -418,6 +420,12 @@ class _TimeFilterState extends State<TimeFilter> {
    // startDate=DateTime.parse(_startDate);
 
     setState(() {
+      thisWeekendButtonEnabled = false;
+      todayButtonEnabled = false;
+      tomorrowButtonEnabled = false;
+      thisWeekButtonEnabled = false;
+      nextWeekButtonEnabled = false;
+      nextWeekendButtonEnabled = false;
       startDate=args.value.startDate;
       endDate=args.value.endDate;
       _dateRangePickerController.selectedRange =
@@ -427,6 +435,7 @@ class _TimeFilterState extends State<TimeFilter> {
     print("DAte: "+_startDate);
     print("End DAte: "+_endDate);
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AbstractQueryNotifier>(builder: (context, model, child) {
@@ -447,6 +456,7 @@ class _TimeFilterState extends State<TimeFilter> {
         Padding(
           padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
           child: SfDateRangePicker(
+            // on selectedcallbackfunction
             onSelectionChanged: _onSelectionChanged,
             monthViewSettings: DateRangePickerMonthViewSettings(
               firstDayOfWeek: 1,

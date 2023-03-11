@@ -127,6 +127,8 @@ class _MapResultsState extends State<MapResults> {
 
     return FlutterMap(
       options: MapOptions(
+
+        // to prevent map to rotate
         interactiveFlags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
         center: userPosition,
         zoom: 15.0,
@@ -254,6 +256,8 @@ class _MapResultsState extends State<MapResults> {
                     locationData["coordinates"]["latitude"],
                     locationData["coordinates"]["longitude"],
                   );
+                  print(latLng.LatLng(locationData["coordinates"]["latitude"],
+                      locationData["coordinates"]["longitude"]));
                 })
                 // NavigatorConstants.sendT
                 //
@@ -291,6 +295,7 @@ class _MapResultsState extends State<MapResults> {
       (element) {
         if ((element!["coordinates"]["latitude"] == latitude) &
             (element["coordinates"]["longitude"] == longitude)) {
+          print(latitude.toString()+","+longitude.toString());
           Ids.add(element["id"]);
         }
       },
